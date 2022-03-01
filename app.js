@@ -6,16 +6,22 @@ const inputFunction = () => {
         .then(res => res.json())
         .then(data => loadData(data.data));
     document.getElementById('search-box').value = '';
+
 }
 
 const loadData = (phonedata) => {
-    const phones = phonedata.slice(0, 20);
-    const container = document.getElementById('container-phone');
-    phones.forEach(phone => {
-        // console.log(phone);
-        const div = document.createElement('div');
-        div.classList.add('col')
-        div.innerHTML = `
+    if (phonedata.length === 0) {
+        document.getElementById('error-msg').style.display = 'block';
+    } else {
+        document.getElementById('error-msg').style.display = 'none';
+        const phones = phonedata.slice(0, 20);
+        const container = document.getElementById('container-phone');
+        container.textContent = '';
+        phones.forEach(phone => {
+            // console.log(phone);
+            const div = document.createElement('div');
+            div.classList.add('col')
+            div.innerHTML = `
          <div class="card h-100">
                         <img class="w-50 mx-auto m-2" src="${phone.image}" class="card-img-top" alt="...">
                         <div class="card-body ">
@@ -28,8 +34,10 @@ const loadData = (phonedata) => {
                     </div>
         
         `
-        container.appendChild(div);
-    });
+            container.appendChild(div);
+        });
+    }
+
 }
 
 const product = (id) => {
@@ -42,6 +50,7 @@ const product = (id) => {
 const productDisplay = (information) => {
     console.log(information.others);
     const detailsContainer = document.getElementById('details-container');
+    detailsContainer.textContent = '';
     const div = document.createElement('div');
     div.innerHTML = `
      <div class="d-flex justify-content-center mx-auto ">
