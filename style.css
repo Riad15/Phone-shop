@@ -1,4 +1,6 @@
 #error-msg{
+
     display: none;
     background-color: red;
+    border-radius: 4px;
 }

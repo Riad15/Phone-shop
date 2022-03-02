@@ -12,8 +12,13 @@ const inputFunction = () => {
 const loadData = (phonedata) => {
     if (phonedata.length === 0) {
         document.getElementById('error-msg').style.display = 'block';
+        setTimeout(myFunction, 3000);
+
+        function myFunction() {
+            document.getElementById('error-msg').style.display = 'none';
+        }
+
     } else {
-        document.getElementById('error-msg').style.display = 'none';
         const phones = phonedata.slice(0, 20);
         const container = document.getElementById('container-phone');
         container.textContent = '';
@@ -53,13 +58,17 @@ const productDisplay = (information) => {
     detailsContainer.textContent = '';
     const div = document.createElement('div');
     div.innerHTML = `
-     <div class="d-flex justify-content-center mx-auto ">
-                    <div class="m-4 w-25">
-                        <img class="w-75 mx-auto m-1 " src="${information.image}" alt="...">
+     <div class=" container d-flex flex-wrap justify-content-center">
+                    <div class="ol-lg-5 m-2 p-4">
+                        <img style="width: 450px ; height: 280px;" class="d-block w-100" src="${information.image}" alt="...">
+                        <div>
+                        <h1 class="">${information.name}</h1>
+                        <p class= "">${information.releaseDate ? information.releaseDate : 'no Release Date. '}</p>
+                        </div>
                     </div>
-                    <div>
+                    <div class="col-lg-7 p-4">
                 
-                        <table class="table table-bordered border-Dark m-4 w-75">
+                        <table class="table table-bordered border-Dark m-2 w-75">
                             <tr>
                                 <th>Ficherers</th>
                                 <th>Sensor</th>
